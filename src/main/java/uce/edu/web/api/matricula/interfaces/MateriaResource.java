@@ -20,49 +20,49 @@ public class MateriaResource {
     private MateriaService materiaService;
 
     @GET
-    @Path("/todos")
+    @Path("")
     public List<Materia> listarTodos() {
         return materiaService.listarTodos();
     }
 
     @GET
-    @Path("/consultarPorId/{id}")
+    @Path("/{id}")
     public Materia consultarPorId(@PathParam("id") Integer iden) {
         return materiaService.consultarPorId(iden);
     }
 
     @POST
-    @Path("/crear")
+    @Path("")
     public void guardar(Materia mat) {
         this.materiaService.crear(mat);
     }
 
     @PUT
-    @Path("/actualizar/{id}")
+    @Path("/{id}")
     public void actualizar(@PathParam("id") Integer iden, Materia mat) {
         this.materiaService.actualizar(iden, mat);
     }
 
     @PATCH
-    @Path("/actualizarParcial/{id}")
+    @Path("/{id}")
     public void actualizarParcial(@PathParam("id") Integer iden, Materia mat) {
         this.materiaService.actualizarParcial(iden, mat);
     }
 
     @DELETE
-    @Path("/eliminar/{id}")
+    @Path("/{id}")
     public void eliminar(@PathParam("id") Integer iden) {
         this.materiaService.eliminar(iden);
     }
 
     @GET
-    @Path("/buscarPorCredito/{creditos}")
+    @Path("/credito/{creditos}")
     public List<Materia> buscarPorNombre(@PathParam("creditos") Integer creditos) {
         return this.materiaService.buscarPorCreditos(creditos);
     }
 
     @GET
-    @Path("/buscarPorSemestre/{semestre}")
+    @Path("/semestre/{semestre}")
     public List<Materia> buscarPorSemestre(@PathParam("semestre") Integer semestre) {
         return this.materiaService.buscarPorSemestre(semestre);
     }

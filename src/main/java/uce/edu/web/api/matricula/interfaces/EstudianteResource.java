@@ -14,54 +14,56 @@ import jakarta.ws.rs.QueryParam;
 import uce.edu.web.api.matricula.application.EstudianteService;
 import uce.edu.web.api.matricula.domain.Estudiante;
 
-@Path("/estudiantes")
+@Path("/estudiantes/")
 public class EstudianteResource {
 
     @Inject
     private EstudianteService estudianteService;
 
     @GET
-    @Path("/todos")
+    @Path("")
     public List<Estudiante> listarTodos() {
+        System.out.println("Listar Todos XXXXXXXXXXXXXXXXXXXXXXXXX");
         return estudianteService.listarTodos();
     }
 
     @GET
-    @Path("/consultarPorId/{id}")
+    @Path("/{id}")
     public Estudiante consultarPorId(@PathParam("id") Integer iden) {
         return estudianteService.consultarPoId(iden);
     }
 
     @POST
-    @Path("/crear")
+    @Path("")
     public void guardar(Estudiante estu) {
         this.estudianteService.crear(estu);
     }
 
     @PUT
-    @Path("/actualizar/{id}")
+    @Path("/{id}")
     public void actualizar(@PathParam("id") Integer iden, Estudiante estu) {
         this.estudianteService.actualizar(iden, estu);
     }
 
     @PATCH
-    @Path("/actualizarParcial/{id}")
+    @Path("/{id}")
     public void actualizarParcial(@PathParam("id") Integer iden, Estudiante estu) {
         this.estudianteService.actualizarParcial(iden, estu);
     }
 
     @DELETE
-    @Path("/eliminar/{id}")
+    @Path("/{id}")
     public void eliminar(@PathParam("id") Integer iden) {
         this.estudianteService.eliminar(iden);
     }
 
     @GET
-    @Path("/buscarPorProvincia") // para la consulta con query param es
-                                 // http://localhost:8080/estudiantes/buscarPorProvincia?provincia=xxx
-                                 // http://localhost:8080/estudiantes/buscarPorProvincia?provincia=xxx&&genero=xxx
+    @Path("/provincia/genero") // para la consulta con query param es
+    // http://localhost:8080/estudiantes/buscarPorProvincia?provincia=xxx
+    // http://localhost:8080/estudiantes/buscarPorProvincia?provincia=xxx&&genero=xxx
     public List<Estudiante> buscarPorProvincia(@QueryParam("provincia") String provincia,
             @QueryParam("genero") String genero) {
+        System.out.println("Listar Por Provincia y Genero XXXXXXXXXXXXXXXXXXXXXXXXX");
         return this.estudianteService.buscarPorProvincia(provincia, genero);
     }
 
