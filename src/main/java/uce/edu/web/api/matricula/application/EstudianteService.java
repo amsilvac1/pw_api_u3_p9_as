@@ -30,8 +30,8 @@ public class EstudianteService {
     }
 
     @Transactional
-    public void crear(Estudiante estu) {
-        this.estudianteRepository.persist(estu); // persist: crear
+    public void crear(EstudianteRepresentation estu) {
+        this.estudianteRepository.persist(mapperToEstudiante(estu));
     }
 
     @Transactional
@@ -63,9 +63,14 @@ public class EstudianteService {
         this.estudianteRepository.deleteById(id.longValue());
     }
 
-    public List<Estudiante> buscarPorProvincia(String provincia, String genero) {
-        // return this.estudianteRepository.find("provincia", provincia).list();
-        return this.estudianteRepository.find("provincia = ?1 and genero = ?2", provincia, genero).list();
+    public List<EstudianteRepresentation> buscarPorProvincia(String provincia, String genero) {
+        List<EstudianteRepresentation> list = new ArrayList<>();
+        List<Estudiante> estudiantes = this.estudianteRepository
+                .find("provincia = ?1 and genero = ?2", provincia, genero).list();
+        for (Estudiante est : estudiantes) {
+            list.add(mapperToER(est));
+        }
+        return list;
     }
 
     private EstudianteRepresentation mapperToER(Estudiante est) {
@@ -80,7 +85,7 @@ public class EstudianteService {
     }
 
     private Estudiante mapperToEstudiante(EstudianteRepresentation est) {
-        EstudianteRepresentation estuR = new EstudianteRepresentation();
+        Estudiante estuR = new Estudiante();
         estuR.id = est.id;
         estuR.nombre = est.nombre;
         estuR.apellido = est.apellido;
