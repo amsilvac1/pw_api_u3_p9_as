@@ -36,16 +36,18 @@ public class EstudianteService {
 
     @Transactional
     public void actualizar(Integer id, EstudianteRepresentation est) {
-        Estudiante estu = this.mapperToEstudiante(this.consultarPoId(id));
+        Estudiante estu = this.estudianteRepository.findById(id.longValue());
         estu.nombre = est.nombre;
         estu.apellido = est.apellido;
         estu.fechaNacimiento = est.fechaNacimiento;
+        estu.provincia = est.provincia;
+        estu.genero = est.genero;
         // se actualiza automaticamente por dirty checking
     }
 
     @Transactional
     public void actualizarParcial(Integer id, EstudianteRepresentation est) {
-        Estudiante estu = this.mapperToEstudiante(this.consultarPoId(id));
+        Estudiante estu = this.estudianteRepository.findById(id.longValue());
         if (est.nombre != null) {
             estu.nombre = est.nombre;
         }
@@ -54,6 +56,12 @@ public class EstudianteService {
         }
         if (est.fechaNacimiento != null) {
             estu.fechaNacimiento = est.fechaNacimiento;
+        }
+        if (est.provincia != null) {
+            estu.provincia = est.provincia;
+        }
+        if (est.genero != null) {
+            estu.genero = est.genero;
         }
         // se actualiza automaticamente por dirty checking
     }
