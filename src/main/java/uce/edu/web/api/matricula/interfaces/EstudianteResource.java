@@ -40,7 +40,7 @@ public class EstudianteResource {
     @GET
     @Path("")
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed("admin") // solo el administrador
+    @RolesAllowed({ "admin", "estudiante" }) // solo el administrador
     public List<EstudianteRepresentation> listarTodos() {
         System.out.println("Listar Todos XXXXXXXXXXXXXXXXXXXXXXXXX");
         List<EstudianteRepresentation> estudiantes = new ArrayList<>();
